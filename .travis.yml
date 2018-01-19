@@ -1,0 +1,19 @@
+matrix:
+  include:
+    - os: linux
+      dist: trusty
+      language: python
+      python: "3.5"
+    - os: linux
+      dist: trusty
+      language: python
+      python: "3.6"
+
+cache:
+  pip: true
+
+install:
+  - make install
+
+script:
+  - make lint

@@ -1,5 +1,6 @@
 ENV
 data
 __pycache__
+.idea
 strava_map/static/Polyline.encoded.js
 config-production.txt
