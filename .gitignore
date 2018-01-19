@@ -1,4 +1,5 @@
 ENV
 data
-static/Polyline.encoded.js
+__pycache__
+strava_map/static/Polyline.encoded.js
 config-production.txt

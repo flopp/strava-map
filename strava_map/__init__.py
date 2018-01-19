@@ -9,7 +9,7 @@ import json
 app = flask.Flask(__name__)
 app.secret_key = 'this is my extremely secret key'
 app.config.from_envvar('APP_CONFIG')
-
+print(app.config)
 port = 7123
 
 logging.basicConfig(level=logging.INFO)
