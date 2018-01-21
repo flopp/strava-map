@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 </head>
 
 {% block body %}
@@ -26,9 +27,6 @@
         </ul>
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a href="{{ url_for('sync') }}" class="nav-link">Resync</a>
-            </li>
-            <li class="nav-item">
                 <a href="{{ url_for('logout') }}" class="nav-link">Log out</a>
             </li>
         </ul>
@@ -39,27 +37,19 @@
 <div id="map"></div>
 
 <div id="activities">
-    <div class="list-group">
-    {% for activity in activities %}
-        <div class="list-group-item flex-column align-items-start" data-id="{{activity.id}}" data-polyline="{{activity.map.summary_polyline}}">
-            <h5 class="mb-1">{{ activity.name }}<h5>
-            <small>{{ activity.type }}</small>
-            <br />
-            <small>s={{ activity.distance }}</small>
-            <small>t={{ activity.elapsed_time }}</small>
-            <br />
-            <small>{{ activity.start_date_local }}</small>
-        </div>
-    {% endfor %}
-    </ul>
+    <button id="btn-fetchactivities" type="button" class="btn btn-primary btn-block">Fetch Activities</button>
+    <div id="fetch-spinner"><i class="fa fa-refresh fa-spin fa-3x fa-fw"></i>
+<span class="sr-only">Loading...</span>
+</div>
+    <div class="list-group"></div>
 </div>
 
 {% endblock %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.js" ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    
+
     <script src="{{ url_for('static', filename='Polyline.encoded.js') }}"></script>
     <script src="{{ url_for('static', filename='map.js') }}"></script>
 </html>

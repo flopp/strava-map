@@ -1,7 +1,7 @@
 ROOT_DIR := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 
 run:
-	APP_CONFIG=${ROOT_DIR}/config-production.txt run.py
+	APP_CONFIG=${ROOT_DIR}/config-production.txt ./run.py
 
 install:
 	curl \

@@ -21,7 +21,10 @@ var App = {
     
     initEventHandlers: function() {
         var self = this;
-        $('#activities .list-group-item').click(function () {
+        $('#btn-fetchactivities').click(function () {
+            self.fetchActivities();
+        });
+        $(document).on('click', '#activities .list-group-item', function () {
             $('#activities .list-group-item').removeClass('active');
             if (self.track) {
                 self.track.remove();
@@ -35,6 +38,55 @@ var App = {
                 self.track = L.polyline(polyline).addTo(self.map);
                 self.map.fitBounds(self.track.getBounds());
             }
+        });
+    },
+
+    clearActivities: function() {
+        $('#activities .list-group-item').remove();
+    },
+
+    fetchActivities: function() {
+        $('#btn-fetchactivities').prop('disabled', true);
+        this.clearActivities();
+        $('#fetch-spinner').show();
+        $.getJSON('/activities', function(data) {
+            $('#fetch-spinner').hide();
+            $.each(data, function(key, item) {
+                var polyline = item['map']['summary_polyline'];
+                if (!polyline) {
+                    polyline = 'None';
+                }
+                $('#activities .list-group').append(
+                    $('<div>')
+                        .attr('class', 'list-group-item flex-column align-items-start')
+                        .attr('data-id', item['id'])
+                        .attr('data-polyline', polyline)
+                        .append(
+                            $('<h5>')
+                                .attr('class', 'mb-1')
+                                .append(item['name'])
+                        )
+                        .append(
+                            $('<small>').append(item['type'])
+                        )
+                        .append(
+                            $('<br />')
+                        )
+                        .append(
+                            $('<small>').append('s=' + item['distance'])
+                        )
+                        .append(
+                            $('<small>').append('t=' + item['elapsed_time'])
+                        )
+                        .append(
+                            $('<br />')
+                        )
+                        .append(
+                            $('<small>').append(item['start_date_local'])
+                        )
+                );
+            });
+            $('#btn-fetchactivities').prop('disabled', false);
         });
     }
 };
