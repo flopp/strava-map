@@ -43,7 +43,6 @@ def login():
 @app.route('/logout')
 def logout():
     flask.session.pop('access_token')
-    flask.session.pop('athlete_id')
     return flask.redirect(flask.url_for('homepage'))
 
 
