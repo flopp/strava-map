@@ -6,8 +6,8 @@ import stravalib
 
 app = flask.Flask(__name__)
 app.secret_key = 'this is my extremely secret key'
-app.config.from_envvar('APP_CONFIG')
-print(app.config)
+app.config.from_object('config')
+
 port = 7123
 
 logging.basicConfig(level=logging.INFO)
@@ -55,7 +55,3 @@ def auth_done():
                                            code=code)
     flask.session['access_token'] = token
     return flask.redirect(flask.url_for('homepage'))
-
-
-if __name__ == '__main__':
-    app.run(debug=True, port=port)
