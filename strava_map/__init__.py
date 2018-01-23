@@ -8,8 +8,6 @@ app = flask.Flask(__name__)
 app.secret_key = 'this is my extremely secret key'
 app.config.from_object('config')
 
-port = 7123
-
 logging.basicConfig(level=logging.INFO)
 
 
@@ -36,7 +34,7 @@ def login():
     client = stravalib.client.Client()
     auth_url = client.authorization_url(client_id=app.config['CLIENT_ID'],
                                         scope=None,
-                                        redirect_uri='http://127.0.0.1:{}/auth'.format(port))
+                                        redirect_uri=app.config['AUTH_URL'])
     return flask.render_template('login.html', auth_url=auth_url)
 
 
