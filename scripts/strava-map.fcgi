@@ -1,10 +1,10 @@
-#!~/projects/strava-map/ENV/bin/python
+#!/home/flopp/projects/strava-map/ENV/bin/python
 
 import sys, os
 import logging
 from logging.handlers import RotatingFileHandler
 
-PATH = os.path.expanduser("~/projects/strava-map/")
+PATH = os.path.expanduser("/home/flopp/projects/strava-map/")
 sys.path.insert(0, PATH)
 
 from strava_map import app
